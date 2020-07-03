@@ -20,9 +20,9 @@ def hello():
 def return_files():
     res = requests.get(_url('/users/?mobile=8442590880'))
     data = json.loads(res.text)
-    exist = len(data) > 0
+    #exist = len(data) > 0
     #name = data[0]['name'] if exist > 0 else 'No user'
-    return str(len(json.loads(res.text)))
+    return str(len(data))
 
 
 @app.route("/sms", methods=['POST'])
@@ -32,12 +32,12 @@ def sms_reply():
     number = trasmisor.split(':')
     parsed_phone = phonenumbers.parse(number[1], None)
     national_phone = phonenumbers.format_number(
-        parsed_phone, phonenumbers.PhoneNumberFormat.NATIONAL)
+        parsed_phone, phonenumbers.PhoneNumberFormat.NATIONAL).replace(" ","")
     international_phone = phonenumbers.format_number(
-        parsed_phone, phonenumbers.PhoneNumberFormat.INTERNATIONAL)
+        parsed_phone, phonenumbers.PhoneNumberFormat.INTERNATIONAL).replace(" ","")
     get_user = requests.get(_url('/users/?mobile={0}'.format(national_phone)))
     user_json = json.loads(get_user.text)
-    """ checar formato de numero """
+    print("No1 {0} \nNo2 {1}".format(national_phone,international_phone))
     if len(user_json) <= 0:
         get_user = requests.get(
             _url('/users/?mobile={0}'.format(international_phone)))
