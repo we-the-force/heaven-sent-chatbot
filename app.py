@@ -9,15 +9,12 @@ app.secret_key = 'beZ}6EmDsU1RNICI!Q)4EWq%?_1/]h'
 
 switch_phrases = {
     "Ayuda": "aun estoy en desarrollo no puedo ayudarte u.u",
-    "Help": "Sorry, I'm not finished yet",
+    "Help": "Sorry, I'm not finished yet.\nCommands:\nHola\nHi\nAhoy\nBye",
     "Hola": "Hola Amigo",
     "Hi": "Hi friend",
     "Ahoy": "Arrgh",
+    "Bye": "See you n.n"
 }
-
-@app.route("/")
-def hello():
-    return str('y')
 
 
 @app.route("/session")
@@ -26,18 +23,6 @@ def session_storage():
     counter += 1
     session['counter'] = counter
     return str(counter)
-
-
-@app.route("/contact")
-def return_contacts():
-    #res = requests.get(_url('/contacts?contact.id=28'))
-    res = requests.get(_url('/contacts'))
-    data = json.loads(res.text)
-    message = ("Hello {0}<br>".format('Alex'))
-    for c in data:
-        message += ('{name}<br>'.format_map(c['owner']))
-    return str(message)
-
 
 @app.route("/sms", methods=['POST'])
 def sms_reply():
@@ -101,7 +86,7 @@ def _get_user(number, x=0):
 
 
 def _url(path):
-    return 'http://167.172.156.126:1337' + path
+    return 'https://api.heavensentnow.com' + path
 
 
 def _get(path):
