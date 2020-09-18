@@ -16,6 +16,9 @@ switch_phrases = {
     "Bye": "See you n.n"
 }
 
+@app.route("/")
+def hello():
+    return 'Hello'
 
 @app.route("/session")
 def session_storage():
