@@ -27,3 +27,7 @@ Ngrok
     ./ngrok http 3001
 
     //get ip from ngrok forwarding
+
+Gunicorn server
+    pip install gunicorn
+    gunicorn --bind 0.0.0.0:3001 wsgi:app
