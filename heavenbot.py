@@ -53,7 +53,7 @@ def sms_reply():
 
     #si existe la session
     if user_id != 0:
-        print('')
+        message = ('{}'.format(request))
         #thread = session.get('thread', income_msg.lower())
         #func = switch_commands.get(thread, lambda x,y: _return_phrases(thread))
         #message = func(session.get('user_name'),user_id)
@@ -78,7 +78,7 @@ def sms_reply():
         #else:
             # no hay usuario
             #    "Sorry we did not find your user :C, if you do not have an account you can create one in app.heavensentnow.com")
-
+        message = message = ('{}'.format(request))
     # Create reply
     resp = MessagingResponse()
     resp.message(message)
