@@ -1,6 +1,6 @@
 from flask import Flask, request, session
 from twilio.twiml.messaging_response import Message, MessagingResponse
-from src.helpers import _return_phrases
+from .src.helpers import _return_phrases
 from src.db import _get_user, _get_contacts
 import requests
 import phonenumbers
@@ -45,6 +45,7 @@ switch_commands = {
 
 @app.route("/sms", methods=['POST'])
 def sms_reply():
+    print(request)
     #consigo el mensaje
     income_msg = request.form.get('Body')
     #consigo el id de session, si no hay lo pongo en zero
