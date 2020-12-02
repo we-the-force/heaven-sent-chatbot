@@ -1,21 +1,13 @@
 from flask import Flask, request, session
 from twilio.twiml.messaging_response import Message, MessagingResponse
+from src.helpers import _return_phrases
+from src.db import _get_user, _get_contacts
 import requests
 import phonenumbers
 import json
 
 app = Flask(__name__)
 app.secret_key = 'beZ}6EmDsU1RNICI!Q)4EWq%?_1/]h'
-
-
-switch_phrases = {
-    "ayuda": "aun estoy en desarrollo no puedo ayudarte u.u",
-    "help": "Sorry, I'm not finished yet.\nCommands:\nHola\nHi\nAhoy\nBye\nMensajes compartidos conmigo",
-    "hola": "Hola Amigo",
-    "hi": "Hi friend",
-    "ahoy": "Arrgh",
-    "bye": "See you n.n",
-}
 
 
 def _logout(x,y):
@@ -31,12 +23,8 @@ def _test(x,y):
     return message
 
 
-def _return_phrases(arg):
-    return switch_phrases.get(arg, "I can't understand you write 'Help' for more information")
-
-
 def _contacts_memories(user, userId):
-    contacts = _get('/contacts?contact.id={0}'.format(userId))
+    contacts = _get_contacts(userId)
     message = ("Hello {0}\n".format(user))
     if len(contacts) > 0:
         message += ("The following contacts have memories for you:\n")
@@ -47,35 +35,6 @@ def _contacts_memories(user, userId):
     else:
         message += ("You have not been shared any memory")
     return message
-
-
-def _get_user(number, x=0):
-    if x == 2:
-        return False
-    if number[0] == '+':
-        format_tel = 'INT' if x else 'NAT'
-        number = _phone(format_tel, number)
-    else:
-        x = 1
-    user_json = _get('/users/?mobile={0}'.format(number))
-    if len(user_json) <= 0:
-        return _get_user(number, x + 1)
-    return user_json
-
-
-def _url(path):
-    return 'https://api.heavensentnow.com' + path
-
-
-def _get(path):
-    get_data = requests.get(_url(path))
-    return json.loads(get_data.text)
-
-
-def _phone(type_format, number):
-    parsed_phone = phonenumbers.parse(number, None)
-    format_phone = phonenumbers.PhoneNumberFormat.INTERNATIONAL if type_format == 'INT' else phonenumbers.PhoneNumberFormat.NATIONAL
-    return phonenumbers.format_number(parsed_phone, format_phone).replace(" ", "")
 
 
 switch_commands = {
@@ -93,9 +52,10 @@ def sms_reply():
 
     #si existe la session
     if user_id != 0:
-        thread = session.get('thread', income_msg.lower())
-        func = switch_commands.get(thread, lambda x,y: _return_phrases(thread))
-        message = func(session.get('user_name'),user_id)
+        #thread = session.get('thread', income_msg.lower())
+        #func = switch_commands.get(thread, lambda x,y: _return_phrases(thread))
+        #message = func(session.get('user_name'),user_id)
+        message = _return_phrases(income_msg)
     #si no existe session
     else:
         #de donde viene el mensaje
