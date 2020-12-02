@@ -1,7 +1,7 @@
 from flask import Flask, request, session
 from twilio.twiml.messaging_response import Message, MessagingResponse
-from .src.helpers import _return_phrases
-from src.db import _get_user, _get_contacts
+#from .helpers import _return_phrases
+#from .db import _get_user, _get_contacts
 import requests
 import phonenumbers
 import json
@@ -53,11 +53,12 @@ def sms_reply():
 
     #si existe la session
     if user_id != 0:
+        print('')
         #thread = session.get('thread', income_msg.lower())
         #func = switch_commands.get(thread, lambda x,y: _return_phrases(thread))
         #message = func(session.get('user_name'),user_id)
-        message = _return_phrases(income_msg)
-    #si no existe session
+        #message = _return_phrases(income_msg)
+        #si no existe session
     else:
         #de donde viene el mensaje
         trasmisor = request.form.get('From')
@@ -65,19 +66,18 @@ def sms_reply():
         number = trasmisor.split(':')
 
         # busca el usuario por el telefono
-        user_json = _get_user(number[1])
+        #user_json = _get_user(number[1])
 
         #si hay usuario
-        if user_json:
-            session['user_id'] = user_json[0]['id']
-            session['user_name'] = user_json[0]['name']
-            message = _contacts_memories(
-                session['user_name'], session['user_id'])
-
-        else:
+        #if user_json:
+        #    session['user_id'] = user_json[0]['id']
+        #    session['user_name'] = user_json[0]['name']
+        #    message = _contacts_memories(
+        #        session['user_name'], session['user_id'])
+#
+        #else:
             # no hay usuario
-            message = (
-                "Sorry we did not find your user :C, if you do not have an account you can create one in app.heavensentnow.com")
+            #    "Sorry we did not find your user :C, if you do not have an account you can create one in app.heavensentnow.com")
 
     # Create reply
     resp = MessagingResponse()
