@@ -10,6 +10,10 @@ export FLASK_APP=HeavenSentBot
 flask run 
 ## Twilio
 
+## NLTK
+### download data
+python -m nltk.downloader all
+
 ## Instalation
 On Ubuntu:
     $ sudo apt-get update
