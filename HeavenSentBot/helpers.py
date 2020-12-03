@@ -19,3 +19,6 @@ def replace_contractions(text):
 
 def tokenize(text):
     return nltk.word_tokenize(text)
+
+def flow_help():
+    return "Sorry, I'm not finished yet."

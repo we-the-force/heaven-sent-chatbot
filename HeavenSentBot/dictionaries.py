@@ -7,5 +7,4 @@ switch_phrases = {
     "bye": "See you n.n",
 }
 
-exit = ["exit","salir"]
-
+exit_terms = ["exit","salir","quit"]
