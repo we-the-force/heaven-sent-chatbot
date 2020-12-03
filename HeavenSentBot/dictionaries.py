@@ -6,3 +6,6 @@ switch_phrases = {
     "ahoy": "Arrgh",
     "bye": "See you n.n",
 }
+
+exit = ["exit","salir"]
+
