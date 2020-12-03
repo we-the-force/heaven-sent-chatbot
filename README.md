@@ -5,7 +5,9 @@ python version: 3.6.9
 pip version: 
 
 ## Flesk
-
+export FLASK_ENV=development
+export FLASK_APP=HeavenSentBot
+flask run 
 ## Twilio
 
 ## Instalation
@@ -31,3 +33,5 @@ Ngrok
 Gunicorn server
     pip install gunicorn
     gunicorn --bind 0.0.0.0:3001 wsgi:app
+
+
