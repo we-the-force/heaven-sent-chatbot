@@ -7,10 +7,10 @@ switch_phrases = {
     "bye": "See you n.n",
 }
 
-exit_terms = ["exit","salir","quit"]
+exit_terms = ["exit","salir","quit", "quitar"]
 
 memories_messages = ["mensaje","memoria", "message", "memory"]
 
-memories_pictures = ["imagen","foto","fotografia","picture","image"]
+memories_pictures = ["imagen","foto","fotografia","picture","image", "pic"]
 
 help_terms = ["sos","ayuda","help","hlp"]
