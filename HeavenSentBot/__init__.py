@@ -28,9 +28,14 @@ def create_app(test_config=None):
     @app.route('/sms', methods=['POST'])
     def _main():
         #get data
-        data = json.loads(request.data)
-        number = data['number']
-        income_msg = data['message']
+        income_msg = request.form.get('Body')
+
+        trasmisor = request.form.get('From')
+
+        number = trasmisor.split(':')
+        #data = json.loads(request.data)
+        #number = data['number']
+        #income_msg = data['message']
         #get session if not exist session equal 0
         user_id = session.get('user_id', 0)
         #if session exist send to NLP
@@ -59,7 +64,7 @@ def create_app(test_config=None):
 
         #if not send to login
         else:
-            message = login.login(number)
+            message = login.login(number[1])
 
         #response
         return message
