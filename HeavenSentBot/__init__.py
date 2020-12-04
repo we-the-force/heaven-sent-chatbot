@@ -57,8 +57,11 @@ def create_app(test_config=None):
                     break
 
             if not(flag):
-                flows = {"contacts": flow_contact,
-                         "memories": flow_memory, "phrases": chatbot}
+                flows = {
+                    "contacts": flow_contact,
+                    "memories": flow_memory,
+                    "phrases": chatbot
+                }
                 flow = session.get('thread', 'phrases')
                 func = flows.get(flow)
                 message = func(income_msg)
