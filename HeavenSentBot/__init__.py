@@ -4,11 +4,12 @@ from flask import Flask, request, session
 from . import login
 from . import logout
 from .natural_language_processing import normalize
-from .dictionaries import exit_terms
+from .dictionaries import exit_terms, help_terms
 from .flow_contacts import flow_contact
 from .flow_memories import flow_memory
 from .helpers import flow_help
 from .chat import chatbot
+
 
 def create_app(test_config=None):
     # create and configure the app
@@ -36,18 +37,25 @@ def create_app(test_config=None):
         if user_id != 0:
             #Noise removal
             income_msg = str(normalize(income_msg))
-            flag_exit = 0
+            flag = 0
             for x in exit_terms:
                 if x in income_msg:
                     message = logout.logout()
-                    flag_exit = 1
+                    flag = 1
                     break
 
-            if not(flag_exit):
-                flows = {"contacts": flow_contact, "memories": flow_memory, "help": flow_help , "phrases": chatbot}
+            for x in help_terms:
+                if x in income_msg:
+                    message = flow_help()
+                    flag = 1
+                    break
+
+
+            if not(flag):
+                flows = {"contacts": flow_contact, "memories": flow_memory, "phrases": chatbot}
                 flow = session.get('thread', 'phrases')
                 func = flows.get(flow)
-                message = func()
+                message = func(income_msg)
 
         #if not send to login
         else:

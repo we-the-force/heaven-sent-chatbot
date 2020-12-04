@@ -8,3 +8,9 @@ switch_phrases = {
 }
 
 exit_terms = ["exit","salir","quit"]
+
+memories_messages = ["mensaje","memoria", "message", "memory"]
+
+memories_pictures = ["imagen","foto","fotografia","picture","image"]
+
+help_terms = ["sos","ayuda","help","hlp"]

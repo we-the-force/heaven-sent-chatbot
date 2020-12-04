@@ -29,5 +29,5 @@ def _get_contacts(userID):
     return contacts
 
 def _get_memories(userID, ownerID):
-    memories = _get('/memories?on_demand=true&owners.id={}&recipients.id={}'.format(ownerID,userID))
+    memories = _get('/memories?on_demand=true&sent=true&owners.id={}&recipients.id={}'.format(ownerID,userID))
     return memories
