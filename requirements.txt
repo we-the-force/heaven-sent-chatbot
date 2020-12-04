@@ -1,4 +1,5 @@
 astroid==2.4.2
+autopep8==1.5.4
 certifi==2020.11.8
 chardet==3.0.4
 click==7.1.2
@@ -17,13 +18,17 @@ nltk==3.5
 phonenumbers==8.12.13
 pkg-resources==0.0.0
 pyahocorasick==1.4.0
+pycodestyle==2.6.0
+PyJWT==1.7.1
 pylint==2.6.0
+pytz==2020.4
 regex==2020.11.13
 requests==2.25.0
 six==1.15.0
 textsearch==0.0.17
 toml==0.10.2
 tqdm==4.54.0
+twilio==6.49.0
 typed-ast==1.4.1
 Unidecode==1.1.1
 urllib3==1.26.2

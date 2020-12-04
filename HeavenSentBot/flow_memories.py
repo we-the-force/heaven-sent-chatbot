@@ -1,14 +1,14 @@
 import random
+import json
 from flask import session
-from . import logout
-from .db import _get_memories
+from .db import _get_memories, _url
 from .dictionaries import memories_messages, memories_pictures
 
 
 def flow_memory(income):
     contacts = session.get('contacts', [])
+    in_flow = session.get('memory', 0)
     if len(contacts) > 0:
-        in_flow = session.get('memory', 0)
         if in_flow != 0:
             msg = flow_get_memory(income, in_flow)
         else:
@@ -17,7 +17,7 @@ def flow_memory(income):
         # aqui no deberia poder entrar
         msg = "Lo siento no pude encontrar a ningun contacto. \n Escribe 'Help' para recibir ayuda."
         session.pop('contacts')
-        session.pop('memory')
+        session.pop('memory', None)
         session.pop('thread')
     return msg
 
@@ -54,7 +54,7 @@ def flow_get_memory(income, ownerID):
         msg = "Lo sentimos el usuario no te ha compartido ninguna memoria"
 
     session.pop('contacts')
-    session.pop('memory')
+    session.pop('memory',None)
     session.pop('thread')
     return msg
 
@@ -75,7 +75,7 @@ def flow_ask_memory(income, contacts):
     else:
         msg = "Lo siento no pude encontrar a ningun contacto. \n Escribe 'Help' para recibir ayuda."
         session.pop('contacts')
-        session.pop('memory')
+        session.pop('memory',None)
         session.pop('thread')
 
     return msg
@@ -90,5 +90,12 @@ def format_message(memoria):
 
 
 def format_picture(memoria):
-    msg = ("Aqui le enviamos una foto")
-    return msg
+    cover = memoria.get('cover').get('url')
+    mediaURLs = []
+    mediaURLs.append(cover)
+    for x in memoria['media']:
+        mediaURLs.append(x['url'])
+
+    url = _url(random.choice(mediaURLs))
+    resp = ['media',url]
+    return resp
