@@ -80,7 +80,7 @@ def flow_ask_memory(income, contacts):
         if lang == 'en':
             msg = ("Would you like a message or a photo from {}?".format(ownerName))
         else:
-            msg = ("Te gustaria un mensaje o una imagen de {}?".format(ownerName))
+            msg = ("¿Te gustaria un mensaje o una imagen de {}?".format(ownerName))
         session['memory'] = ownerID
     else:
         msg = ("{}".format(palabras[lang].get("can_not_find")))
