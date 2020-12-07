@@ -2,5 +2,5 @@ from flask import session
 
 def logout():
     session.clear()
-    message = "logged out"
+    message = "Desconectado"
     return message

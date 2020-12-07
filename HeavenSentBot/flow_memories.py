@@ -3,6 +3,7 @@ import json
 from flask import session
 from .db import _get_memories, _url
 from .dictionaries import memories_messages, memories_pictures
+from .natural_language_processing import normalize, tokenize
 
 
 def flow_memory(income):
@@ -15,7 +16,7 @@ def flow_memory(income):
             msg = flow_ask_memory(income, contacts)
     else:
         # aqui no deberia poder entrar
-        msg = "Lo siento no pude encontrar a ningun contacto. \n Escribe 'Help' para recibir ayuda."
+        msg = "Lo siento no pude encontrar a ningun contacto. \n Escribe 'Ayuda' para obtener más información."
         session.pop('contacts')
         session.pop('memory', None)
         session.pop('thread')
@@ -64,7 +65,9 @@ def flow_ask_memory(income, contacts):
     ownerName = ""
     for x in contacts:
         name = x['name'].lower()
-        if name in income:
+        contacto = tokenize(name)
+        result = all(elem in income for elem in contacto)
+        if result:
             ownerID = x['id']
             ownerName = x['name'].lower()
             break

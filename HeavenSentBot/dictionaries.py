@@ -1,16 +1,31 @@
 switch_phrases = {
-    "ayuda": "aun estoy en desarrollo no puedo ayudarte u.u",
-    "help": "Sorry, I'm not finished yet.\nCommands:\nHola\nHi\nAhoy\nBye\nMensajes compartidos conmigo",
     "hola": "Hola Amigo",
-    "hi": "Hi friend",
-    "ahoy": "Arrgh",
-    "bye": "See you n.n",
+    "hello": "Hi Friend",
+    "hi": "Hi Friend",
+    "ahoy": "Ahoy Captain",
 }
 
-exit_terms = ["exit","salir","quit", "quitar"]
+help_menu_opciones = [
+    "Recibir un mensaje asignado",
+    "Cambiar de idioma", "Salir", "Menú de ayuda"
+]
 
-memories_messages = ["mensaje","memoria", "message", "memory"]
+help_menu_options = [
+    "Receive an assigned message",
+    "Change language", "Log out", "Help menu"
+]
 
-memories_pictures = ["imagen","foto","fotografia","picture","image", "pic"]
+exit_terms = ["exit", "salir", "quit", "quitar", "log"]
 
-help_terms = ["sos","ayuda","help","hlp"]
+memories_messages = [
+    "mensaje", "memoria", "message", "memory",
+    "mssg", "msj", "mensajes", "memorias", "message", "memories"
+]
+
+memories_pictures = ["imagen", "foto", "fotografia", "picture", "image", "pic"]
+
+help_terms = ["sos", "ayuda", "help", "hlp"]
+
+menu_terms = ["menu"]
+
+language_terms = ["idioma","language"]
