@@ -2,7 +2,7 @@ import random
 import json
 from flask import session
 from .db import _get_memories, _url
-from .dictionaries import memories_messages, memories_pictures
+from .dictionaries import memories_messages, memories_pictures, palabras
 from .natural_language_processing import normalize, tokenize
 
 
@@ -16,7 +16,8 @@ def flow_memory(income):
             msg = flow_ask_memory(income, contacts)
     else:
         # aqui no deberia poder entrar
-        msg = "Lo siento no pude encontrar a ningun contacto. \n Escribe 'Ayuda' para obtener más información."
+        lang = session.get('lang', 'en')
+        msg = ("{}".format(palabras[lang].get("can_not_find")))
         session.pop('contacts')
         session.pop('memory', None)
         session.pop('thread')
@@ -52,7 +53,8 @@ def flow_get_memory(income, ownerID):
             else:
                 msg = format_picture(memory)
     else:
-        msg = "Lo sentimos el usuario no te ha compartido ninguna memoria"
+        lang = session.get('lang', 'en')
+        msg = ("{}".format(palabras[lang].get("no_memory_shared")))
 
     session.pop('contacts')
     session.pop('memory',None)
@@ -72,11 +74,16 @@ def flow_ask_memory(income, contacts):
             ownerName = x['name'].lower()
             break
 
+    lang = session.get('lang', 'en')
+
     if ownerID != 0:
-        msg = ("Te gustaria un mensaje o una imagen de {}?".format(ownerName))
+        if lang == 'en':
+            msg = ("Would you like a message or a photo from {}?".format(ownerName))
+        else:
+            msg = ("Te gustaria un mensaje o una imagen de {}?".format(ownerName))
         session['memory'] = ownerID
     else:
-        msg = "Lo siento no pude encontrar a ningun contacto. \n Escribe 'Help' para recibir ayuda."
+        msg = ("{}".format(palabras[lang].get("can_not_find")))
         session.pop('contacts')
         session.pop('memory',None)
         session.pop('thread')

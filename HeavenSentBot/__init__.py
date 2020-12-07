@@ -5,10 +5,10 @@ from . import login
 from . import logout
 from twilio.twiml.messaging_response import Body, Media, Message, MessagingResponse
 from .natural_language_processing import normalize
-from .dictionaries import exit_terms, help_terms, menu_terms
+from .dictionaries import exit_terms, help_terms, menu_terms, palabras
 from .flow_contacts import flow_contact
 from .flow_memories import flow_memory
-from .helpers import flow_help, flow_menu
+from .helpers import flow_help, flow_menu, change_lang
 from .chat import chatbot
 
 
@@ -29,15 +29,15 @@ def create_app(test_config=None):
     @app.route('/sms', methods=['POST'])
     def _main():
         # get data
-        income_msg = request.form.get('Body')
-        trasmisor = request.form.get('From')
-        number = trasmisor.split(':')[1]
-        #data = json.loads(request.data)
-        #number = data['number']
-        #income_msg = data['message']
+        #income_msg = request.form.get('Body')
+        #trasmisor = request.form.get('From')
+        #number = trasmisor.split(':')[1]
+        data = json.loads(request.data)
+        number = data['number']
+        income_msg = data['message']
         # get session if not exist session equal 0
         user_id = session.get('user_id', 0)
-
+        lang = session.get('lang', 'en')
         # if session exist send to NLP
         if user_id != 0:
             # Noise removal
@@ -51,7 +51,7 @@ def create_app(test_config=None):
 
             if not(flag):
                 if 'menu' in income_msg:
-                    message = "Seleccione la opción que mejor satisface lo que buscas:\n"
+                    message = ("{}\n".format(palabras[lang].get("menu_select")))
                     message += flow_menu()
                     flag = 1
 
@@ -66,6 +66,7 @@ def create_app(test_config=None):
                 flows = {
                     "contacts": flow_contact,
                     "memories": flow_memory,
+                    "language": change_lang,
                     "phrases": chatbot
                 }
                 flow = session.get('thread', 'phrases')
