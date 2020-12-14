@@ -1,8 +1,12 @@
 switch_phrases = {
-    "hola": "Hola Amigo",
-    "hello": "Hi Friend",
-    "hi": "Hi Friend",
-    "ahoy": "Ahoy Captain",
+    "hola": "Hola",
+    "hello": "Hello",
+    "hi": "Hi",
+    "i miss you": "i miss you too",
+    "i love you": "i love you too",
+    "te extraño": "yo también te extraño",
+    "te quiero": "yo también te quiero",
+    "te amo": "yo también te amo",
 }
 
 help_menu_opciones = [
