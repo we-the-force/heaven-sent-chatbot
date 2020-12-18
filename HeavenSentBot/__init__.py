@@ -31,7 +31,7 @@ def create_app(test_config=None):
         # get data
         income_msg = request.values.get('Body', None)
         trasmisor = request.values.get('From')
-        number = trasmisor.split(':')[1]
+        # number = trasmisor.split(':')[1]
         print(request.values)
         #data = json.loads(request.data)
         #number = data['number']
