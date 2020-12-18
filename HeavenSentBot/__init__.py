@@ -27,7 +27,7 @@ def create_app(test_config=None):
 
     # chatbot
     @app.route('/text', methods=['POST'])
-    def _main():
+    def _sms():
         # get data
         income_msg = request.values.get('Body', None)
         trasmisor = request.values.get('From')
