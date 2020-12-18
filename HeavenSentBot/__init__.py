@@ -32,7 +32,8 @@ def create_app(test_config=None):
         income_msg = request.values.get('Body', None)
         trasmisor = request.values.get('From')
         # number = trasmisor.split(':')[1]
-        print(request.values)
+        print(trasmisor)
+        print(income_msg)
         #data = json.loads(request.data)
         #number = data['number']
         #income_msg = data['message']
@@ -76,7 +77,7 @@ def create_app(test_config=None):
 
         # if not send to login
         else:
-            message = login.login(number)
+            message = login.login(trasmisor)
 
         response = MessagingResponse()
         msg = Message()
