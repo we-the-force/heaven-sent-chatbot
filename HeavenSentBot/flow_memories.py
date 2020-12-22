@@ -3,6 +3,8 @@ import json
 from flask import session
 from .db import _get_memories, _url
 from .dictionaries import memories_messages, memories_pictures, palabras
+from .helpers import flow_menu
+
 from .natural_language_processing import normalize, tokenize
 
 
@@ -55,6 +57,7 @@ def flow_get_memory(income, ownerID):
     else:
         lang = session.get('lang', 'en')
         msg = ("{}".format(palabras[lang].get("no_memory_shared")))
+        msg += flow_menu()
 
     session.pop('contacts')
     session.pop('memory',None)
