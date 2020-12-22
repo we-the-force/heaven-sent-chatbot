@@ -59,9 +59,9 @@ def flow_get_memory(income, ownerID):
         msg = ("{}".format(palabras[lang].get("no_memory_shared")))
         msg += flow_menu()
 
-    session.pop('contacts')
-    session.pop('memory',None)
-    session.pop('thread')
+    # session.pop('contacts')
+    # session.pop('memory',None)
+    # session.pop('thread')
     return msg
 
 
