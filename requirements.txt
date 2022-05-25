@@ -19,7 +19,7 @@ nltk==3.5
 phonenumbers==8.12.13
 pyahocorasick==1.4.0
 pycodestyle==2.6.0
-PyJWT==1.7.1
+PyJWT==2.4.0
 pylint==2.6.0
 pytz==2020.4
 regex==2020.11.13
